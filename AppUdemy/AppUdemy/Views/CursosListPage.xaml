@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppUdemy.Views.CursosListPage"
+             xmlns:converters="clr-namespace:AppUdemy.Converters"
+             >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="ImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <!-- Toolbar -->
+    <ContentPage.ToolbarItems
+        >
+        <ToolbarItem Text="Agregar" Command="{Binding NewCommand}" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout
+            Margin="20,0,0,0"
+            >
+            <!-- Título -->
+            <Label
+                Text="Listado de cursos"
+                FontSize="Large"
+                HorizontalOptions="CenterAndExpand" />
+            <RefreshView 
+                Command="{Binding RefreshCommand}"
+                IsRefreshing="{Binding IsBusy}" >
+                <!-- Listado -->
+                <CollectionView
+                ItemsSource="{Binding CursosList}"
+                SelectionMode="Single"
+                SelectedItem="{Binding CursoSelected}"
+                SelectionChangedCommand="{Binding SelectedCommand}"
+                >
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                Source="{Binding FotoDelCursoBase64, Converter={StaticResource ImageConverter}}"
+                                Grid.Column="1"
+                                Grid.RowSpan="3"
+                                />
+                                <Label
+                                Grid.Column="2"
+                                Grid.Row="1"
+                                FontAttributes="Bold"
+                                Grid.RowSpan="2"
+                                Text="{Binding Nombre}" />
+                                <Label
+                                Grid.Column="2"
+                                Grid.Row="2"
+                                Grid.RowSpan="2"
+                                Text="{Binding Precio, StringFormat='${0:F2}'}" />
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <!--spinner-->
+            </RefreshView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

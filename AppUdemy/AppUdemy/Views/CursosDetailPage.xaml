@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="AppUdemy.Views.CursosDetailPage"
+             xmlns:converters="clr-namespace:AppUdemy.Converters"
+             >
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="ImageConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout
+                Margin="20"
+                VerticalOptions="StartAndExpand">
+                <Image
+                    Source="{Binding CursoSelected.FotoDelCursoBase64, Converter={StaticResource ImageConverter}}"
+                    WidthRequest="300"
+                    HeightRequest="300"
+                 />
+                <Label
+                Text="Nombre del curso" />
+                <Entry
+                    Text="{Binding CursoSelected.Nombre}"/>
+                <Label
+                    Text="Precio del curso" />
+                <Entry
+                    Text="{Binding CursoSelected.Precio}" />
+                <!--Falta poner la fotografia y comandos de take and select-->
+                <Label
+                    Text="Descripcion del curso" />
+                <Entry
+                    Text="{Binding CursoSelected.Descripcion}" />
+                <Label
+                    Text="Fecha de creacion del curso" />
+                <Entry
+                    Text="{Binding CursoSelected.FechaDeCreacion}" />
+                <Label
+                    Text="Nombre del profesor" />
+                <Entry
+                    Text="{Binding CursoSelected.NombreDelProfesor}" />
+                <Label
+                    Text="Latitud" />
+                <Entry
+                    Text="{Binding CursoSelected.Latitude}" />
+                <Label
+                    Text="Longitud" />
+                <Entry
+                    Text="{Binding CursoSelected.Longitude}" />
+                <Button
+                    Text="Guardar"
+                    Command="{Binding SaveCommand}" />
+                <Button
+                    Text="Eliminar"
+                    Command="{Binding DeleteCommand}" />
+                <Button
+                    Text="Cancelar"
+                    Command="{Binding CancelCommand}"/>
+                <Button
+                    Text="Seleccionar Foto"
+                    Command="{Binding SelectPictureCommand}"/>
+                <Button
+                    Text="Tomar Foto"
+                    Command="{Binding TakePictureCommand}"/>
+                <Button
+                    Text="Obtener ubicación"
+                    Command="{Binding GetLocationCommand}"/>
+                <Button
+                    Text="Abrir en maps"
+                    Command="{Binding OpenMapsCommand}"/>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
